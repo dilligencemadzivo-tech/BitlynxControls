@@ -1,0 +1,2648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitlynx Controls - Industrial Automation Solutions</title>
+    <link href="Bitlynx.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in': 'fade-in 0.6s ease-out',
+                        'fade-in-up': 'fade-in-up 0.8s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Mobile-first responsive styles */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.6s ease-out;
+        }
+
+        .animate-fade-in-up {
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animation-delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .animation-delay-300 {
+            animation-delay: 0.3s;
+        }
+
+        .bg-grid-pattern {
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563eb, #0891b2);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+
+            /* Header adjustments */
+            header .flex.justify-between {
+                padding: 0 1rem;
+            }
+
+            /* Hero section adjustments */
+            #hero h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            #hero p {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+
+            /* About section adjustments */
+            #about .lg\:flex {
+                flex-direction: column;
+            }
+
+            #about .lg\:w-1\/3 {
+                width: 100%;
+            }
+
+            #about .lg\:w-2\/3 {
+                width: 100%;
+            }
+
+            /* Services section adjustments */
+            #services .lg\:flex-row {
+                flex-direction: column;
+            }
+
+            #services .lg\:w-1\/2 {
+                width: 100%;
+            }
+
+            /* Training section adjustments */
+            #training .grid.md\:grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+
+            /* Contact section adjustments */
+            #contact .lg\:grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+
+            #contact .lg\:col-span-2 {
+                grid-column: span 1;
+            }
+
+            /* Footer adjustments */
+            footer .lg\:grid-cols-4 {
+                grid-template-columns: 1fr;
+            }
+
+            /* General spacing adjustments */
+            .py-20 {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+
+            .py-16 {
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+
+            .mb-16 {
+                margin-bottom: 2rem;
+            }
+
+            .text-4xl,
+            .text-5xl {
+                font-size: 1.875rem;
+            }
+
+            .text-3xl {
+                font-size: 1.5rem;
+            }
+
+            .text-2xl {
+                font-size: 1.25rem;
+            }
+
+            /* Button sizing */
+            .px-8 {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .py-4 {
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+
+            /* Image adjustments */
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            /* Hide complex animations on mobile for performance */
+            .animate-float,
+            .bg-grid-pattern {
+                display: none;
+            }
+        }
+
+        /* Additional mobile optimizations */
+        @media (max-width: 480px) {
+
+            /* Further reduce font sizes for very small screens */
+            #hero h1 {
+                font-size: 1.75rem;
+            }
+
+            #hero p {
+                font-size: 0.9rem;
+            }
+
+            /* Stack elements vertically */
+            .flex-col {
+                flex-direction: column;
+            }
+
+            /* Adjust padding and margins */
+            .px-4 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .py-8 {
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+
+            /* Make buttons full width */
+            .flex-row {
+                flex-direction: column;
+            }
+
+            .flex-row>* {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+            /* Adjust grid layouts */
+            .grid-cols-2,
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Touch-friendly button styles */
+        button,
+        a.btn {
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Improve readability on mobile */
+        body {
+            font-size: 16px;
+            /* Prevent zoom on iOS */
+            line-height: 1.6;
+        }
+
+        /* Optimize images for mobile */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Mobile menu styles */
+        #mobile-menu {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            background: white;
+            z-index: 40;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Coverflow carousel mobile adjustments */
+        @media (max-width: 768px) {
+            .coverflow-container {
+                perspective: 800px;
+                height: 300px;
+            }
+
+            .coverflow {
+                transform-style: preserve-3d;
+                width: 100%;
+                height: 100%;
+                position: relative;
+            }
+
+            .coverflow-item {
+                position: absolute;
+                width: 60%;
+                left: 20%;
+                transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 lg:h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class=" p-2 rounded-lg flex items-center justify-center">
+                        <img src="assets/images/baner-dec-left (2).png" alt="Bitlynx Controls Logo"
+                            class="h-8 w-8 object-contain">
+                    </div>
+                    <div>
+                        <h1 class="text-xl lg:text-2xl font-bold text-white">
+                            Bitlynx<span class="text-blue-600">Controls</span>
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#hero"
+                        class="text-sm font-medium text-white hover:text-blue-300 transition-colors">Home</a>
+                    <a href="#about"
+                        class="text-sm font-medium text-white hover:text-blue-300 transition-colors">About</a>
+                    <a href="#services"
+                        class="text-sm font-medium text-white hover:text-blue-300 transition-colors">Services</a>
+                    <a href="#training"
+                        class="text-sm font-medium text-white hover:text-blue-300 transition-colors">Training</a>
+                    <a href="#contact"
+                        class="text-sm font-medium text-white hover:text-blue-300 transition-colors">Contact</a>
+                    <a href="#contact"
+                        class="bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">Get
+                        Quote</a>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-md text-white">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 py-4 animate-fade-in">
+                <div class="space-y-2">
+                    <a href="#hero"
+                        class="block w-full text-left px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Home</a>
+                    <a href="#about"
+                        class="block w-full text-left px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">About</a>
+                    <a href="#services"
+                        class="block w-full text-left px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Services</a>
+                    <a href="#training"
+                        class="block w-full text-left px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Training</a>
+                    <a href="#contact"
+                        class="block w-full text-left px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Contact</a>
+                    <a href="#contact"
+                        class="block w-full text-left px-4 py-2 bg-blue-600 text-white rounded-md mx-4 mt-4 hover:bg-blue-700 transition-colors">Contact
+                        Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero"
+        class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0 bg-grid-pattern"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <!-- Content -->
+                <div class="text-center lg:text-left animate-fade-in-up">
+                    <div
+                        class="inline-flex items-center bg-blue-600/20 backdrop-blur-sm border border-blue-400/30 rounded-full px-4 py-2 mb-6">
+                        <svg class="h-4 w-4 text-blue-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                            </path>
+                        </svg>
+                        <span class="text-blue-300 text-sm font-medium">15+ Years of Excellence</span>
+                    </div>
+
+                    <h1 class="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+                        Leading
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                            Industrial </span>
+                        Automation Solutions
+                    </h1>
+
+                    <p class="text-lg text-gray-300 mb-6 max-w-2xl leading-relaxed">
+                        <span>Bitlynx</span> Controls bridges the gap between almost-right solutions and the right
+                        solutions.
+                        We deliver precision, quality, and advanced technology for your industrial needs.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                        <a href="#services"
+                            class="group bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-full font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 flex items-center justify-center transform hover:scale-105">
+                            Explore Services
+                            <svg class="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+
+                        <a href="#training"
+                            class="group bg-transparent border-2 border-white/30 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 flex items-center justify-center backdrop-blur-sm">
+                            <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m-9 4h10a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            Training Programs
+                        </a>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-gray-700">
+                        <div class="text-center">
+                            <div class="text-xl lg:text-3xl font-bold text-white mb-1">23+</div>
+                            <div class="text-gray-400 text-xs">Clients Served</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-xl lg:text-3xl font-bold text-white mb-1">50+</div>
+                            <div class="text-gray-400 text-xs">Projects Completed</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-xl lg:text-3xl font-bold text-white mb-1">15+</div>
+                            <div class="text-gray-400 text-xs">Years Experience</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Element -->
+                <div class="relative animate-fade-in-up animation-delay-200 mt-8 lg:mt-0">
+                    <div class="relative">
+                        <!-- Main image placeholder with tech pattern -->
+                        <div
+                            class="bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-2xl p-6 backdrop-blur-sm border border-white/10">
+                            <div class="space-y-4">
+                                <!-- Simulated PLC Interface -->
+                                <div class="bg-gray-900/50 rounded-xl p-4 border border-gray-600">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="text-green-400 text-xs font-mono">PLC STATUS: ONLINE</div>
+                                        <div class="flex space-x-1">
+                                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                            <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                                            <div class="w-2 h-2 bg-red-400 rounded-full"></div>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="flex justify-between text-gray-300 text-xs">
+                                            <span>Motor Speed</span>
+                                            <span class="text-blue-400">1450 RPM</span>
+                                        </div>
+                                        <div class="flex justify-between text-gray-300 text-xs">
+                                            <span>Temperature</span>
+                                            <span class="text-green-400">65°C</span>
+                                        </div>
+                                        <div class="flex justify-between text-gray-300 text-xs">
+                                            <span>Pressure</span>
+                                            <span class="text-yellow-400">2.5 Bar</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Feature cards -->
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div
+                                        class="bg-gradient-to-br from-blue-500/10 to-blue-600/10 rounded-lg p-3 border border-blue-400/20">
+                                        <svg class="h-6 w-6 text-blue-400 mb-1" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                            </path>
+                                        </svg>
+                                        <div class="text-white text-xs font-semibold">IoT Integration</div>
+                                    </div>
+                                    <div
+                                        class="bg-gradient-to-br from-purple-500/10 to-purple-600/10 rounded-lg p-3 border border-purple-400/20">
+                                        <svg class="h-6 w-6 text-purple-400 mb-1" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z">
+                                            </path>
+                                        </svg>
+                                        <div class="text-white text-xs font-semibold">Expert Team</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating elements - hidden on mobile -->
+                        <div
+                            class="absolute -top-4 -right-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full p-3 animate-float hidden lg:block">
+                            <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div
+                            class="absolute -bottom-3 -left-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full p-2 animate-float animation-delay-300 hidden lg:block">
+                            <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-white/60 rounded-full mt-2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-12 lg:py-20 relative"
+        style="background-image: url('images/bg\ about'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <!-- Overlay for readability -->
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center mb-8 lg:mb-16">
+                <h2 class="text-3xl lg:text-5xl font-bold text-white mb-4 drop-shadow-md">
+                    About <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">Us</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-4 lg:mb-6"></div>
+                <p class="text-lg lg:text-xl text-gray-200 max-w-3xl mx-auto drop-shadow-md">
+                    Discover the story behind Bitlynx Controls and what drives our commitment to excellence in
+                    industrial automation.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <div class="lg:flex">
+                    <!-- Tab Navigation -->
+                    <div class="lg:w-1/3 bg-gray-50 p-4 lg:p-6">
+                        <div class="space-y-2">
+                            <button
+                                class="about-tab w-full flex items-center p-3 lg:p-4 rounded-xl transition-all bg-blue-600 text-white shadow-lg transform scale-105"
+                                data-tab="about">
+                                <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h3M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                    </path>
+                                </svg>
+                                <span class="font-medium">About Us</span>
+                                <svg class="h-4 w-4 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </button>
+                            <button
+                                class="about-tab w-full flex items-center p-3 lg:p-4 rounded-xl transition-all bg-white text-gray-700 hover:bg-gray-100 hover:shadow-md"
+                                data-tab="mission">
+                                <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                    </path>
+                                </svg>
+                                <span class="font-medium">Our Mission</span>
+                            </button>
+                            <button
+                                class="about-tab w-full flex items-center p-3 lg:p-4 rounded-xl transition-all bg-white text-gray-700 hover:bg-gray-100 hover:shadow-md"
+                                data-tab="motivation">
+                                <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+                                    </path>
+                                </svg>
+                                <span class="font-medium">Motivation</span>
+                            </button>
+                            <button
+                                class="about-tab w-full flex items-center p-3 lg:p-4 rounded-xl transition-all bg-white text-gray-700 hover:bg-gray-100 hover:shadow-md"
+                                data-tab="values">
+                                <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+                                    </path>
+                                </svg>
+                                <span class="font-medium">Our Values</span>
+                            </button>
+                            <button
+                                class="about-tab w-full flex items-center p-3 lg:p-4 rounded-xl transition-all bg-white text-gray-700 hover:bg-gray-100 hover:shadow-md"
+                                data-tab="team">
+                                <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z">
+                                    </path>
+                                </svg>
+                                <span class="font-medium">Our Team</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div class="lg:w-2/3 p-6 lg:p-12">
+                        <div class="animate-fade-in">
+                            <div id="about-content" class="tab-content">
+                                <h3 class="text-xl lg:text-3xl font-bold text-gray-900 mb-4 lg:mb-6">About Bitlynx
+                                    Controls
+                                </h3>
+                                <p class="text-gray-600 mb-4">
+                                    Bitlynx Controls Limited is your trusted partner for IoT Telemetry Systems,
+                                    Industrial Automation,
+                                    Process Instrumentation, and Electrical Systems. With over 15 years of technical
+                                    expertise in
+                                    IoT Systems, Control Systems, Process Instrumentation, and Electrical Switchgear.
+                                </p>
+                                <p class="text-gray-600 mb-6">
+                                    Our passion lies in providing comprehensive turn-key automation solutions that span
+                                    from
+                                    factory stand-alone machines to complex industrial and business processes.
+                                </p>
+                                <div class="grid grid-cols-2 gap-3 lg:gap-4">
+                                    <div class="bg-blue-50 p-3 lg:p-4 rounded-lg">
+                                        <div class="text-xl lg:text-2xl font-bold text-blue-600 mb-1">15+</div>
+                                        <div class="text-sm text-gray-600">Years Experience</div>
+                                    </div>
+                                    <div class="bg-green-50 p-3 lg:p-4 rounded-lg">
+                                        <div class="text-xl lg:text-2xl font-bold text-green-600 mb-1">100+</div>
+                                        <div class="text-sm text-gray-600">Projects Delivered</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="mission-content" class="tab-content hidden">
+                                <h3 class="text-xl lg:text-3xl font-bold text-gray-900 mb-4 lg:mb-6">Our Purpose</h3>
+                                <ul class="space-y-3 lg:space-y-4">
+                                    <li class="flex items-start">
+                                        <div class="bg-blue-100 p-2 rounded-full mr-3 lg:mr-4 mt-1">
+                                            <svg class="h-4 w-4 text-blue-600" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900 mb-1">We serve our community</h4>
+                                            <p class="text-gray-600 text-sm">Providing innovative solutions that benefit
+                                                local industries and communities.</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="bg-green-100 p-2 rounded-full mr-3 lg:mr-4 mt-1">
+                                            <svg class="h-4 w-4 text-green-600" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 12l2 2 4-4m7.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900 mb-1">We create value for
+                                                stakeholders</h4>
+                                            <p class="text-gray-600 text-sm">Delivering measurable results and
+                                                sustainable growth for all partners.</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="bg-purple-100 p-2 rounded-full mr-3 lg:mr-4 mt-1">
+                                            <svg class="h-4 w-4 text-purple-600" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900 mb-1">We make real what matters</h4>
+                                            <p class="text-gray-600 text-sm">Transforming ideas into practical,
+                                                impactful automation solutions.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div id="motivation-content" class="tab-content hidden">
+                                <h3 class="text-xl lg:text-3xl font-bold text-gray-900 mb-4 lg:mb-6">Our Motivation</h3>
+                                <p class="text-gray-600 mb-4">
+                                    Founded by experienced engineers and managers in the automation space, Bitlynx
+                                    Controls was
+                                    established with a clear goal: to fill the critical gap in Control Systems solutions
+                                    across Tanzania.
+                                </p>
+                                <p class="text-gray-600 mb-6">
+                                    We recognized the need for reliable, advanced automation solutions that could meet
+                                    international
+                                    standards while being accessible to local industries.
+                                </p>
+                                <div
+                                    class="bg-gradient-to-r from-blue-50 to-cyan-50 p-4 lg:p-6 rounded-xl border border-blue-100">
+                                    <h4 class="font-semibold text-gray-900 mb-3">Our Founding Vision</h4>
+                                    <p class="text-gray-600 text-sm">
+                                        "To bridge the technology gap and bring world-class industrial automation
+                                        solutions
+                                        to every corner of Tanzania and beyond."
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div id="values-content" class="tab-content hidden">
+                                <h3 class="text-xl lg:text-3xl font-bold text-gray-900 mb-4 lg:mb-6">Our Core Values
+                                </h3>
+                                <p class="text-gray-600 mb-6">
+                                    Our values were developed from our people and our customers. At Bitlynx Controls
+                                    Limited,
+                                    we want to recognize ourselves everywhere by the values we practice.
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-4">
+                                    <div
+                                        class="bg-white border border-gray-100 p-3 lg:p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                                        <h5 class="font-semibold text-gray-900 mb-2">Ambitious</h5>
+                                        <p class="text-gray-600 text-sm">We set high goals and strive to exceed
+                                            expectations</p>
+                                    </div>
+                                    <div
+                                        class="bg-white border border-gray-100 p-3 lg:p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                                        <h5 class="font-semibold text-gray-900 mb-2">Determined</h5>
+                                        <p class="text-gray-600 text-sm">We persist through challenges to deliver
+                                            results</p>
+                                    </div>
+                                    <div
+                                        class="bg-white border border-gray-100 p-3 lg:p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                                        <h5 class="font-semibold text-gray-900 mb-2">Visionary</h5>
+                                        <p class="text-gray-600 text-sm">We anticipate future needs and innovate
+                                            accordingly</p>
+                                    </div>
+                                    <div
+                                        class="bg-white border border-gray-100 p-3 lg:p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                                        <h5 class="font-semibold text-gray-900 mb-2">Collaborative</h5>
+                                        <p class="text-gray-600 text-sm">We value each other and work as one team</p>
+                                    </div>
+                                    <div
+                                        class="bg-white border border-gray-100 p-3 lg:p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                                        <h5 class="font-semibold text-gray-900 mb-2">Dependable</h5>
+                                        <p class="text-gray-600 text-sm">We deliver on our promises consistently</p>
+                                    </div>
+                                    <div
+                                        class="bg-white border border-gray-100 p-3 lg:p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                                        <h5 class="font-semibold text-gray-900 mb-2">Excellence</h5>
+                                        <p class="text-gray-600 text-sm">We maintain the highest standards in everything
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Team Content -->
+                            <div class="tab-content hidden" id="team-content" data-tab="team">
+                                <h3 class="text-xl lg:text-3xl font-bold text-gray-900 mb-4 lg:mb-6">Meet Our Team</h3>
+                                <p class="text-gray-600 mb-6 lg:mb-8 leading-relaxed">
+                                    Our dedicated team of professionals brings together diverse expertise in
+                                    engineering,
+                                    finance, project management, and software development to deliver exceptional
+                                    results.
+                                </p>
+                                <!-- Team Grid -->
+                                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+                                    <!-- Technical Director -->
+                                    <div class="team-member relative group cursor-pointer"
+                                        data-member="technical-director">
+                                        <div
+                                            class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                                            <div class="relative">
+                                                <img src="images/Technical Director.jpg" alt="Eng. R. R. Chikonzo"
+                                                    class="w-full h-48 lg:h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                                                <div
+                                                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                                </div>
+                                                <div
+                                                    class="absolute bottom-0 left-0 right-0 p-3 lg:p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-4 group-hover:translate-y-0">
+                                                    <h4 class="font-bold text-base lg:text-lg">Eng. R. R. Chikonzo</h4>
+                                                    <p class="text-blue-300 text-xs lg:text-sm">Technical Director</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="p-3 lg:p-4 bg-gradient-to-r from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                                <p class="text-sm text-gray-600 truncate">PLC Programming, SCADA Systems
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Financial Director -->
+                                    <div class="team-member relative group cursor-pointer"
+                                        data-member="financial-director">
+                                        <div
+                                            class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                                            <div class="relative">
+                                                <img src="images/Finance Director.jpg" alt="I.M. Tillya"
+                                                    class="w-full h-48 lg:h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                                                <div
+                                                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                                </div>
+                                                <div
+                                                    class="absolute bottom-0 left-0 right-0 p-3 lg:p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-4 group-hover:translate-y-0">
+                                                    <h4 class="font-bold text-base lg:text-lg">I.M. Tillya</h4>
+                                                    <p class="text-blue-300 text-xs lg:text-sm">Finance Director</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="p-3 lg:p-4 bg-gradient-to-r from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                                <p class="text-sm text-gray-600 truncate">Financial Planning, Budget
+                                                    Management</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Projects Engineer -->
+                                    <div class="team-member relative group cursor-pointer"
+                                        data-member="projects-engineer">
+                                        <div
+                                            class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                                            <div class="relative">
+                                                <img src="images/Project Manager.jpg" alt="A.F. Tuvana"
+                                                    class="w-full h-48 lg:h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                                                <div
+                                                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                                </div>
+                                                <div
+                                                    class="absolute bottom-0 left-0 right-0 p-3 lg:p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-4 group-hover:translate-y-0">
+                                                    <h4 class="font-bold text-base lg:text-lg">A.F. Tuvana</h4>
+                                                    <p class="text-blue-300 text-xs lg:text-sm">Projects Engineer</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="p-3 lg:p-4 bg-gradient-to-r from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                                <p class="text-sm text-gray-600 truncate">Project Coordination, System
+                                                    Integration</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Software Developer -->
+                                    <div class="team-member relative group cursor-pointer"
+                                        data-member="software-developer">
+                                        <div
+                                            class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                                            <div class="relative">
+                                                <img src="images/software devoloper.jpg" alt="D. Madzivo"
+                                                    class="w-full h-48 lg:h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                                                <div
+                                                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                                </div>
+                                                <div
+                                                    class="absolute bottom-0 left-0 right-0 p-3 lg:p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-4 group-hover:translate-y-0">
+                                                    <h4 class="font-bold text-base lg:text-lg">D. Madzivo</h4>
+                                                    <p class="text-blue-300 text-xs lg:text-sm">Software Developer</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="p-3 lg:p-4 bg-gradient-to-r from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                                <p class="text-sm text-gray-600 truncate">Embedded Systems, IoT
+                                                    Programming</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Team Member Modal -->
+                                <div id="team-modal"
+                                    class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4"
+                                    style="backdrop-filter: blur(8px);">
+                                    <div
+                                        class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transform scale-95 opacity-0 transition-all duration-500">
+                                        <div class="relative">
+                                            <button id="close-modal"
+                                                class="absolute top-4 right-4 z-10 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors">
+                                                <svg class="h-5 w-5 text-gray-600" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                </svg>
+                                            </button>
+                                            <!-- Technical Director Details -->
+                                            <div id="technical-director-details"
+                                                class="team-details hidden p-6 lg:p-8 animate-slide-up">
+                                                <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+                                                    <img src="assets/images/about-us.3.png" alt="Eng. R. R. Chikonzo"
+                                                        class="w-32 lg:w-48 h-48 lg:h-64 object-cover rounded-xl shadow-lg">
+                                                    <div class="flex-1">
+                                                        <h4 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
+                                                            Eng. R. R.
+                                                            Chikonzo</h4>
+                                                        <p class="text-lg lg:text-xl text-blue-600 font-semibold mb-4">
+                                                            Technical
+                                                            Director</p>
+                                                        <p class="text-gray-600 leading-relaxed mb-6">
+                                                            As Technical Director, Eng. Chikonzo leads our engineering
+                                                            team with over 15 years
+                                                            of experience in industrial automation and control systems.
+                                                            He specializes in PLC
+                                                            programming, SCADA systems, and IoT integration, ensuring
+                                                            our projects meet the highest
+                                                            technical standards and deliver exceptional performance for
+                                                            our clients.
+                                                        </p>
+                                                        <div class="flex flex-wrap gap-2 lg:gap-4">
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs lg:text-sm font-medium hover:bg-blue-200 transition-colors">PLC
+                                                                Programming</span>
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs lg:text-sm font-medium hover:bg-green-200 transition-colors">SCADA
+                                                                Systems</span>
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs lg:text-sm font-medium hover:bg-purple-200 transition-colors">IoT
+                                                                Integration</span>
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs lg:text-sm font-medium hover:bg-orange-200 transition-colors">Project
+                                                                Management</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Financial Director Details -->
+                                            <div id="financial-director-details"
+                                                class="team-details hidden p-6 lg:p-8 animate-slide-up">
+                                                <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+                                                    <img src="images/Finance Director.jpg" alt="I.M. Tillya"
+                                                        class="w-32 lg:w-48 h-48 lg:h-64 object-cover rounded-xl shadow-lg">
+                                                    <div class="flex-1">
+                                                        <h4 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
+                                                            I.M. Tillya
+                                                        </h4>
+                                                        <p class="text-lg lg:text-xl text-blue-600 font-semibold mb-4">
+                                                            Financial
+                                                            Director</p>
+                                                        <p class="text-gray-600 leading-relaxed mb-6">
+                                                            I.M. Tillya oversees our financial operations with a keen
+                                                            eye for detail and strategic
+                                                            financial planning. With extensive experience in project
+                                                            budgeting, cost management,
+                                                            and financial analysis, she ensures our projects remain
+                                                            financially viable while
+                                                            maintaining the highest quality standards.
+                                                        </p>
+                                                        <div class="flex flex-wrap gap-2 lg:gap-4">
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs lg:text-sm font-medium hover:bg-blue-200 transition-colors">Financial
+                                                                Planning</span>
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs lg:text-sm font-medium hover:bg-green-200 transition-colors">Budget
+                                                                Management</span>
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs lg:text-sm font-medium hover:bg-purple-200 transition-colors">Cost
+                                                                Analysis</span>
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs lg:text-sm font-medium hover:bg-orange-200 transition-colors">Risk
+                                                                Assessment</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Projects Engineer Details -->
+                                            <div id="projects-engineer-details"
+                                                class="team-details hidden p-6 lg:p-8 animate-slide-up">
+                                                <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+                                                    <img src="assets/images/about-us.4.png" alt="A.F. Tuvana"
+                                                        class="w-32 lg:w-48 h-48 lg:h-64 object-cover rounded-xl shadow-lg">
+                                                    <div class="flex-1">
+                                                        <h4 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
+                                                            A.F. Tuvana
+                                                        </h4>
+                                                        <p class="text-lg lg:text-xl text-blue-600 font-semibold mb-4">
+                                                            Projects
+                                                            Engineer</p>
+                                                        <p class="text-gray-600 leading-relaxed mb-6">
+                                                            A.F. Tuvana is our lead projects engineer, responsible for
+                                                            overseeing the
+                                                            implementation and execution of complex automation projects.
+                                                            With expertise
+                                                            in system integration and project coordination, Tuvana
+                                                            ensures seamless
+                                                            deployment and successful project delivery within timeline
+                                                            and specifications.
+                                                        </p>
+                                                        <div class="flex flex-wrap gap-2 lg:gap-4">
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs lg:text-sm font-medium hover:bg-blue-200 transition-colors">Project
+                                                                Coordination</span>
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs lg:text-sm font-medium hover:bg-green-200 transition-colors">System
+                                                                Integration</span>
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs lg:text-sm font-medium hover:bg-purple-200 transition-colors">Quality
+                                                                Assurance</span>
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs lg:text-sm font-medium hover:bg-orange-200 transition-colors">Field
+                                                                Implementation</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Software Developer Details -->
+                                            <div id="software-developer-details"
+                                                class="team-details hidden p-6 lg:p-8 animate-slide-up">
+                                                <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+                                                    <img src="images/software.jpg" alt="D. Madzivo"
+                                                        class="w-32 lg:w-48 h-48 lg:h-64 object-cover rounded-xl shadow-lg">
+                                                    <div class="flex-1">
+                                                        <h4 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">D.
+                                                            Madzivo
+                                                        </h4>
+                                                        <p class="text-lg lg:text-xl text-blue-600 font-semibold mb-4">
+                                                            Software
+                                                            Developer</p>
+                                                        <p class="text-gray-600 leading-relaxed mb-6">
+                                                            D. Madzivo is our software development specialist, focusing
+                                                            on custom software
+                                                            solutions for industrial applications. With strong skills in
+                                                            embedded systems,
+                                                            IoT programming, and user interface development, Madzivo
+                                                            creates robust and
+                                                            intuitive software that powers our automation systems.
+                                                        </p>
+                                                        <div class="flex flex-wrap gap-2 lg:gap-4">
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs lg:text-sm font-medium hover:bg-blue-200 transition-colors">Embedded
+                                                                Systems</span>
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs lg:text-sm font-medium hover:bg-green-200 transition-colors">IoT
+                                                                Programming</span>
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs lg:text-sm font-medium hover:bg-purple-200 transition-colors">UI
+                                                                Development</span>
+                                                            <span
+                                                                class="px-2 lg:px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs lg:text-sm font-medium hover:bg-orange-200 transition-colors">Database
+                                                                Management</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <style>
+        .about-tab {
+            cursor: pointer;
+        }
+
+        .about-tab.active {
+            background-color: #2563eb;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .tab-content {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .team-member {
+            perspective: 1000px;
+        }
+
+        .team-member img {
+            cursor: pointer;
+        }
+
+        #team-modal {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #team-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        #team-modal.show>div {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab Navigation
+            const tabs = document.querySelectorAll('.about-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    const targetTab = this.getAttribute('data-tab');
+                    tabs.forEach(t => t.classList.remove('active', 'bg-blue-600', 'text-white', 'transform', 'scale-105'));
+                    tabContents.forEach(content => content.classList.add('hidden'));
+                    this.classList.add('active', 'bg-blue-600', 'text-white', 'transform', 'scale-105');
+                    const targetContent = document.getElementById(targetTab + '-content');
+                    if (targetContent) {
+                        targetContent.classList.remove('hidden');
+                    }
+                });
+                if (tab.getAttribute('data-tab') === 'about') {
+                    tab.classList.add('active', 'bg-blue-600', 'text-white', 'transform', 'scale-105');
+                }
+            });
+
+            // Team Member Modal
+            const teamMembers = document.querySelectorAll('.team-member');
+            const teamModal = document.getElementById('team-modal');
+            const closeModal = document.getElementById('close-modal');
+            const teamDetails = document.querySelectorAll('.team-details');
+
+            teamMembers.forEach(member => {
+                member.addEventListener('click', function () {
+                    const memberId = this.getAttribute('data-member');
+                    teamDetails.forEach(detail => detail.classList.add('hidden'));
+                    const targetDetail = document.getElementById(memberId + '-details');
+                    if (targetDetail) {
+                        targetDetail.classList.remove('hidden');
+                        teamModal.classList.add('show');
+                    }
+                });
+            });
+
+            closeModal.addEventListener('click', function () {
+                teamModal.classList.remove('show');
+                teamDetails.forEach(detail => detail.classList.add('hidden'));
+            });
+
+            teamModal.addEventListener('click', function (e) {
+                if (e.target === teamModal) {
+                    teamModal.classList.remove('show');
+                    teamDetails.forEach(detail => detail.classList.add('hidden'));
+                }
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && teamModal.classList.contains('show')) {
+                    teamModal.classList.remove('show');
+                    teamDetails.forEach(detail => detail.classList.add('hidden'));
+                }
+            });
+        });
+    </script>
+    <!-- Services Preview -->
+    <div class="mt-8 lg:mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+        <div class="bg-white p-4 lg:p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+            <div
+                class="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-3 lg:mb-4 text-xl lg:text-2xl">
+                🎛️</div>
+            <h4 class="text-base lg:text-lg font-semibold text-gray-900 mb-1 lg:mb-2">PLC Solutions</h4>
+            <p class="text-gray-600 text-xs lg:text-sm">Advanced automation and precise control systems</p>
+        </div>
+        <div class="bg-white p-4 lg:p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+            <div
+                class="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-3 lg:mb-4 text-xl lg:text-2xl">
+                📡</div>
+            <h4 class="text-base lg:text-lg font-semibold text-gray-900 mb-1 lg:mb-2">IoT Integration</h4>
+            <p class="text-gray-600 text-xs lg:text-sm">Smart connectivity and real-time monitoring</p>
+        </div>
+        <div class="bg-white p-4 lg:p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+            <div
+                class="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-3 lg:mb-4 text-xl lg:text-2xl">
+                📊</div>
+            <h4 class="text-base lg:text-lg font-semibold text-gray-900 mb-1 lg:mb-2">SCADA Systems</h4>
+            <p class="text-gray-600 text-xs lg:text-sm">Comprehensive supervisory control solutions</p>
+        </div>
+        <div class="bg-white p-4 lg:p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+            <div
+                class="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-3 lg:mb-4 text-xl lg:text-2xl">
+                🎓</div>
+            <h4 class="text-base lg:text-lg font-semibold text-gray-900 mb-1 lg:mb-2">Expert Training</h4>
+            <p class="text-gray-600 text-xs lg:text-sm">Professional development and certification</p>
+        </div>
+    </div>
+    </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-12 lg:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-8 lg:mb-16">
+                <h2 class="text-3xl lg:text-5xl font-bold text-gray-900 mb-4">
+                    Our <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">Services</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-4 lg:mb-6"></div>
+                <p class="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Empowering industrial automation with smart solutions and innovative ideas that drive efficiency and
+                    productivity.
+                </p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="space-y-12 lg:space-y-16">
+                <!-- Service 1 -->
+
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>IoT Telemetry Systems with Learn More Button</title>
+                    <script src="https://cdn.tailwindcss.com"></script>
+                    <style>
+                        .learn-more-container {
+                            position: relative;
+                            display: inline-block;
+                            margin-top: 1rem;
+                        }
+
+                        .additional-buttons {
+                            display: grid;
+                            grid-template-rows: 0fr;
+                            opacity: 0;
+                            transition: all 0.3s ease-in-out;
+                            overflow: hidden;
+                        }
+
+                        .additional-buttons.expanded {
+                            grid-template-rows: 1fr;
+                            opacity: 1;
+                            margin-top: 0.5rem;
+                        }
+
+                        .button-inner {
+                            min-height: 0;
+                        }
+
+                        .info-content {
+                            max-height: 0;
+                            overflow: hidden;
+                            transition: max-height 0.3s ease-in-out;
+                            background-color: #f9fafb;
+                            border-radius: 0.5rem;
+                            margin-top: 0.5rem;
+                        }
+
+                        .info-content.expanded {
+                            max-height: 300px;
+                            padding: 1rem;
+                            border: 1px solid #e5e7eb;
+                        }
+
+                        .rotate-arrow {
+                            transform: rotate(180deg);
+                            transition: transform 0.3s ease-in-out;
+                        }
+                    </style>
+                </head>
+
+                <body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+                    <div class="max-w-6xl w-full">
+                        <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                            <div class="lg:w-1/2">
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform">
+                                    </div>
+                                    <img src="images/iot.jpg" alt="IoT Telemetry Systems"
+                                        class="relative w-full h-64 object-cover rounded-2xl shadow-xl group-hover:shadow-2xl transition-shadow">
+                                    <div
+                                        class="absolute top-4 lg:top-6 left-4 lg:left-6 p-3 lg:p-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+                                        <svg class="h-6 lg:h-8 w-6 lg:w-8 text-white" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:w-1/2 space-y-4 lg:space-y-6">
+                                <div class="flex items-center space-x-3 lg:space-x-4">
+                                    <div class="p-2 lg:p-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl">
+                                        <svg class="h-5 lg:h-6 w-5 lg:w-6 text-white" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="h-px bg-gradient-to-r from-gray-300 to-transparent flex-1"></div>
+                                </div>
+                                <h3 class="text-xl lg:text-3xl font-bold text-gray-900">IoT Telemetry Systems</h3>
+                                <p class="text-base lg:text-lg text-gray-600 leading-relaxed">
+                                    End-to-end IoT solutions for real-time data collection, monitoring, and analysis.
+                                    Perfect
+                                    for remote monitoring and smart energy management.
+                                </p>
+                                <div class="grid grid-cols-2 gap-2 lg:gap-3">
+                                    <div class="flex items-center space-x-2">
+                                        <svg class="h-4 lg:h-5 w-4 lg:w-5 text-green-500 flex-shrink-0" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <span class="text-gray-700 text-xs lg:text-sm">Real-time monitoring</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <svg class="h-4 lg:h-5 w-4 lg:w-5 text-green-500 flex-shrink-0" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <span class="text-gray-700 text-xs lg:text-sm">Cloud connectivity</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <svg class="h-4 lg:h-5 w-4 lg:w-5 text-green-500 flex-shrink-0" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <span class="text-gray-700 text-xs lg:text-sm">Data analytics</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <svg class="h-4 lg:h-5 w-4 lg:w-5 text-green-500 flex-shrink-0" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <span class="text-gray-700 text-xs lg:text-sm">Mobile access</span>
+                                    </div>
+                                </div>
+
+                                <!-- Learn More Button and Additional Options -->
+                                <div class="learn-more-container">
+                                    <button id="learnMoreBtn"
+                                        class="flex items-center justify-center px-4 lg:px-6 py-2 lg:py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 shadow-md">
+                                        <span>Learn More</span>
+                                        <svg id="arrowIcon" class="ml-2 h-4 w-4 transform transition-transform"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+
+                                    <div id="additionalButtons" class="additional-buttons">
+                                        <div class="button-inner space-y-2">
+                                            <button
+                                                class="option-btn w-full px-3 lg:px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-lg transition-colors duration-200 flex items-center justify-between"
+                                                data-target="dashboardDesktop">
+                                                <span>Dashboard - Desktop</span>
+                                                <svg class="h-4 w-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                                </svg>
+                                            </button>
+
+                                            <button
+                                                class="option-btn w-full px-3 lg:px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-lg transition-colors duration-200 flex items-center justify-between"
+                                                data-target="dashboardPhone">
+                                                <span>Mobile Dashboard</span>
+                                                <svg class="h-4 w-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                                </svg>
+                                            </button>
+
+                                            <button
+                                                class="option-btn w-full px-3 lg:px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-lg transition-colors duration-200 flex items-center justify-between"
+                                                data-target="emailOptions">
+                                                <span>Email (CSV & PDF)</span>
+                                                <svg class="h-4 w-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Information Contents -->
+                                    <div id="dashboardDesktop" class="info-content">
+                                        <h4 class="font-bold text-blue-600 mb-2">Desktop Dashboard Features</h4>
+                                        <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                            <li>Comprehensive data visualization with large-screen optimized layouts
+                                            </li>
+                                            <li>Multi-window support for comparing different data streams</li>
+                                            <li>Advanced filtering and data exploration tools</li>
+                                            <li>Export functionality for reports and analysis</li>
+                                            <li>Real-time alerts and notification management</li>
+                                        </ul>
+                                    </div>
+
+                                    <div id="dashboardPhone" class="info-content">
+                                        <h4 class="font-bold text-blue-600 mb-2">Mobile Dashboard Features</h4>
+                                        <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                            <li>Touch-optimized interface for on-the-go monitoring</li>
+                                            <li>Essential metrics displayed in an easy-to-read format</li>
+                                            <li>Push notifications for critical alerts</li>
+                                            <li>Offline capability for limited connectivity situations</li>
+                                            <li>Quick action buttons for common tasks</li>
+                                        </ul>
+                                    </div>
+
+                                    <div id="emailOptions" class="info-content">
+                                        <h4 class="font-bold text-blue-600 mb-2">Email Reporting Options</h4>
+                                        <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                            <li>Automated scheduled reports in CSV or PDF format</li>
+                                            <li>Customizable report templates</li>
+                                            <li>Data filtering options for targeted reporting</li>
+                                            <li>Multiple recipient support with access control</li>
+                                            <li>Historical report archive and management</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const learnMoreBtn = document.getElementById('learnMoreBtn');
+                            const additionalButtons = document.getElementById('additionalButtons');
+                            const arrowIcon = learnMoreBtn.querySelector('i');
+                            const optionButtons = document.querySelectorAll('.option-btn');
+                            const infoContents = document.querySelectorAll('.info-content');
+
+                            let expanded = false;
+                            let activeOption = null;
+
+                            // Toggle the additional buttons
+                            learnMoreBtn.addEventListener('click', function () {
+                                expanded = !expanded;
+
+                                if (expanded) {
+                                    additionalButtons.classList.add('expanded');
+                                    arrowIcon.classList.remove('fa-chevron-down');
+                                    arrowIcon.classList.add('fa-chevron-up');
+                                    learnMoreBtn.classList.remove('pulse');
+                                } else {
+                                    additionalButtons.classList.remove('expanded');
+                                    arrowIcon.classList.remove('fa-chevron-up');
+                                    arrowIcon.classList.add('fa-chevron-down');
+
+                                    // Also close any open info content
+                                    infoContents.forEach(content => {
+                                        content.classList.remove('expanded');
+                                    });
+
+                                    activeOption = null;
+
+                                    // Re-add pulse animation after a delay
+                                    setTimeout(() => {
+                                        learnMoreBtn.classList.add('pulse');
+                                    }, 500);
+                                }
+                            });
+
+                            // Handle option button clicks
+                            optionButtons.forEach(button => {
+                                button.addEventListener('click', function () {
+                                    const targetId = this.getAttribute('data-target');
+
+                                    // If clicking the same option again, close it
+                                    if (activeOption === targetId) {
+                                        document.getElementById(targetId).classList.remove('expanded');
+                                        activeOption = null;
+                                    } else {
+                                        // Close all info contents
+                                        infoContents.forEach(content => {
+                                            content.classList.remove('expanded');
+                                        });
+
+                                        // Open the selected one
+                                        document.getElementById(targetId).classList.add('expanded');
+                                        activeOption = targetId;
+                                    }
+                                });
+                            });
+
+                            // Add hover effect to option buttons
+                            optionButtons.forEach(button => {
+                                button.addEventListener('mouseenter', function () {
+                                    this.classList.add('bounce');
+                                });
+
+                                button.addEventListener('mouseleave', function () {
+                                    this.classList.remove('bounce');
+                                });
+                            });
+                        });
+                    </script>
+                </body>
+
+                <br>
+                <br>
+
+
+                <div class="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-12">
+                    <div class="lg:w-1/2">
+                        <div class="relative group">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform">
+                            </div>
+                            <img src="assets/images/PLC,HMI.jpg" alt="PLC, HMI & SCADA Integration"
+                                class="relative w-full h-64 object-cover rounded-2xl shadow-xl group-hover:shadow-2xl transition-shadow">
+                            <div
+                                class="absolute top-4 lg:top-6 left-4 lg:left-6 p-3 lg:p-4 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl shadow-lg">
+                                <svg class="h-6 lg:h-8 w-6 lg:w-8 text-white" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 space-y-4 lg:space-y-6">
+                        <div class="flex items-center space-x-3 lg:space-x-4">
+                            <div class="p-2 lg:p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl">
+                                <svg class="h-5 lg:h-6 w-5 lg:w-6 text-white" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="h-px bg-gradient-to-r from-gray-300 to-transparent flex-1"></div>
+                        </div>
+                        <h3 class="text-xl lg:text-3xl font-bold text-gray-900">PLC, HMI & SCADA Integration</h3>
+                        <p class="text-base lg:text-lg text-gray-600 leading-relaxed">
+                            Complete system integration using advanced PLC, HMI, and SCADA platforms with comprehensive
+                            staff training for sustainable operation.
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 lg:gap-3">
+                            <div class="flex items-center space-x-2">
+                                <svg class="h-4 lg:h-5 w-4 lg:w-5 text-green-500 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span class="text-gray-700 text-xs lg:text-sm">System integration</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <svg class="h-4 lg:h-5 w-4 lg:w-5 text-green-500 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span class="text-gray-700 text-xs lg:text-sm">Staff training</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <svg class="h-4 lg:h-5 w-4 lg:w-5 text-green-500 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span class="text-gray-700 text-xs lg:text-sm">Process visibility</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <svg class="h-4 lg:h-5 w-4 lg:w-5 text-green-500 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span class="text-gray-700 text-xs lg:text-sm">Efficiency optimization</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+
+            <!-- Stats Section -->
+            <div class="mt-12 lg:mt-20 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl lg:rounded-3xl p-6 lg:p-12">
+                <div class="text-center mb-8 lg:mb-12">
+                    <h3 class="text-xl lg:text-3xl font-bold text-gray-900 mb-4">
+                        Trusted by Industry Leaders
+                    </h3>
+                    <p class="text-gray-600 max-w-2xl mx-auto">
+                        Our commitment to excellence has earned us the trust of businesses across various industries.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                    <div class="text-center">
+                        <div
+                            class="text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-1 lg:mb-2">
+                            23+</div>
+                        <div class="text-gray-600 text-sm lg:text-base font-medium">Satisfied Clients</div>
+                    </div>
+                    <div class="text-center">
+                        <div
+                            class="text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-1 lg:mb-2">
+                            50+</div>
+                        <div class="text-gray-600 text-sm lg:text-base font-medium">Projects Completed</div>
+                    </div>
+                    <div class="text-center">
+                        <div
+                            class="text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-1 lg:mb-2">
+                            15+</div>
+                        <div class="text-gray-600 text-sm lg:text-base font-medium">Years of Experience</div>
+                    </div>
+                    <div class="text-center">
+                        <div
+                            class="text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-1 lg:mb-2">
+                            99%</div>
+                        <div class="text-gray-600 text-sm lg:text-base font-medium">Success Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Section -->
+    <section id="training" class="py-12 lg:py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-8 lg:mb-16">
+                <h2 class="text-3xl lg:text-5xl font-bold text-gray-900 mb-4">
+                    Industrial <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">Training</span>
+                    Programs
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-4 lg:mb-6"></div>
+                <p class="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Gain hands-on experience with PLCs, HMIs, and SCADA systems through our practical training programs.
+                    We equip you with the skills needed to excel in modern industrial automation.
+                </p>
+            </div>
+
+            <!-- Training Programs Grid -->
+            <div class="grid md:grid-cols-2 gap-6 lg:gap-8 mb-12 lg:mb-16">
+                <!-- Program 1 -->
+                <div
+                    class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
+                    <div class="relative h-40 lg:h-48 overflow-hidden">
+                        <img src="images/training 01.jpg" alt="Industrial Automation Fundamentals"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"></div>
+                        <div
+                            class="absolute top-3 lg:top-4 left-3 lg:left-4 px-2 lg:px-3 py-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs lg:text-sm font-medium rounded-full">
+                            Beginner</div>
+                        <div
+                            class="absolute top-3 lg:top-4 right-3 lg:right-4 bg-white/90 backdrop-blur-sm px-2 lg:px-3 py-1 rounded-full text-xs lg:text-sm font-medium text-gray-900">
+                            5 Days</div>
+                    </div>
+                    <div class="p-4 lg:p-6">
+                        <h3
+                            class="text-lg lg:text-xl font-bold text-gray-900 mb-2 lg:mb-3 group-hover:text-blue-600 transition-colors">
+                            Industrial Automation Fundamentals</h3>
+                        <p class="text-gray-600 mb-3 lg:mb-4 leading-relaxed">
+                            Comprehensive introduction to industrial automation principles, PLC basics, and control
+                            systems.
+                        </p>
+                        <div class="mb-4 lg:mb-6">
+                            <h4 class="text-xs lg:text-sm font-semibold text-gray-900 mb-1 lg:mb-2">Key Topics:</h4>
+                            <div class="grid grid-cols-2 gap-1 lg:gap-2">
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">PLC Basics</span>
+                                </div>
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">Control Theory</span>
+                                </div>
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">Safety Systems</span>
+                                </div>
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">Industrial Networks</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2 lg:space-x-3">
+                            <button
+                                class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 px-3 lg:px-4 rounded-lg font-medium hover:opacity-90 transition-opacity text-sm">
+                                for more info download
+                            </button>
+                            <a href="images/Industrial Automation Fundamentals.png" download
+                                class="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center">
+                                <svg class="h-4 lg:h-5 w-4 lg:w-5 text-gray-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 10v6m0 0l-3-3m3 3l3-3M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Program 2 -->
+                <div
+                    class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
+                    <div class="relative h-40 lg:h-48 overflow-hidden">
+                        <img src="images/trainig02.jpg" alt="Advanced PLC Programming & SCADA"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"></div>
+                        <div
+                            class="absolute top-3 lg:top-4 left-3 lg:left-4 px-2 lg:px-3 py-1 bg-gradient-to-r from-green-500 to-green-600 text-white text-xs lg:text-sm font-medium rounded-full">
+                            Intermediate</div>
+                        <div
+                            class="absolute top-3 lg:top-4 right-3 lg:right-4 bg-white/90 backdrop-blur-sm px-2 lg:px-3 py-1 rounded-full text-xs lg:text-sm font-medium text-gray-900">
+                            5 Days</div>
+                    </div>
+                    <div class="p-4 lg:p-6">
+                        <h3
+                            class="text-lg lg:text-xl font-bold text-gray-900 mb-2 lg:mb-3 group-hover:text-blue-600 transition-colors">
+                            Advanced PLC Programming & SCADA</h3>
+                        <p class="text-gray-600 mb-3 lg:mb-4 leading-relaxed">
+                            Advanced programming techniques, SCADA integration, and complex control system development.
+                        </p>
+                        <div class="mb-4 lg:mb-6">
+                            <h4 class="text-xs lg:text-sm font-semibold text-gray-900 mb-1 lg:mb-2">Key Topics:</h4>
+                            <div class="grid grid-cols-2 gap-1 lg:gap-2">
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">Advanced Programming</span>
+                                </div>
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">SCADA Design</span>
+                                </div>
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">Data Management</span>
+                                </div>
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">System Integration</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2 lg:space-x-3">
+                            <button
+                                class="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white py-2 px-3 lg:px-4 rounded-lg font-medium hover:opacity-90 transition-opacity text-sm">
+                                for more info download
+                            </button>
+                            <a href="images/Advanced PLC Programming and SCADA Integration.png" download
+                                class="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center">
+                                <svg class="h-4 lg:h-5 w-4 lg:w-5 text-gray-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 10v6m0 0l-3-3m3 3l3-3M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Program 3 -->
+                <div
+                    class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
+                    <div class="relative h-40 lg:h-48 overflow-hidden">
+                        <img src="images/training 02.jpg" alt="HMI Design & Visualization Mastery"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"></div>
+                        <div
+                            class="absolute top-3 lg:top-4 left-3 lg:left-4 px-2 lg:px-3 py-1 bg-gradient-to-r from-purple-500 to-purple-600 text-white text-xs lg:text-sm font-medium rounded-full">
+                            Advanced</div>
+                        <div
+                            class="absolute top-3 lg:top-4 right-3 lg:right-4 bg-white/90 backdrop-blur-sm px-2 lg:px-3 py-1 rounded-full text-xs lg:text-sm font-medium text-gray-900">
+                            5 Days</div>
+                    </div>
+                    <div class="p-4 lg:p-6">
+                        <h3
+                            class="text-lg lg:text-xl font-bold text-gray-900 mb-2 lg:mb-3 group-hover:text-blue-600 transition-colors">
+                            Industrial Automation Networks and Protocols</h3>
+                        <p class="text-gray-600 mb-3 lg:mb-4 leading-relaxed">
+                            Expert-level training on automation networks and protocols.
+                        </p>
+                        <div class="mb-4 lg:mb-6">
+                            <h4 class="text-xs lg:text-sm font-semibold text-gray-900 mb-1 lg:mb-2">Key Topics:</h4>
+                            <div class="grid grid-cols-2 gap-1 lg:gap-2">
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">HMI Principles</span>
+                                </div>
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">Visualization Tools</span>
+                                </div>
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">User Interface Design</span>
+                                </div>
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">Alarm Management</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2 lg:space-x-3">
+                            <button
+                                class="flex-1 bg-gradient-to-r from-purple-500 to-purple-600 text-white py-2 px-3 lg:px-4 rounded-lg font-medium hover:opacity-90 transition-opacity text-sm">
+                                for more info download
+                            </button>
+                            <a href="images/Industrial Automation Networks and Protocols.png" download
+                                class="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center">
+                                <svg class="h-4 lg:h-5 w-4 lg:w-5 text-gray-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 10v6m0 0l-3-3m3 3l3-3M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Program 4 -->
+                <div
+                    class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
+                    <div class="relative h-40 lg:h-48 overflow-hidden">
+                        <img src="images/traing room 2.jpg" alt="Industrial IoT & Cybersecurity"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"></div>
+                        <div
+                            class="absolute top-3 lg:top-4 left-3 lg:left-4 px-2 lg:px-3 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs lg:text-sm font-medium rounded-full">
+                            Expert</div>
+                        <div
+                            class="absolute top-3 lg:top-4 right-3 lg:right-4 bg-white/90 backdrop-blur-sm px-2 lg:px-3 py-1 rounded-full text-xs lg:text-sm font-medium text-gray-900">
+                            5 Days</div>
+                    </div>
+                    <div class="p-4 lg:p-6">
+                        <h3
+                            class="text-lg lg:text-xl font-bold text-gray-900 mb-2 lg:mb-3 group-hover:text-blue-600 transition-colors">
+                            Smart Industrial Automation and IIoT</h3>
+                        <p class="text-gray-600 mb-3 lg:mb-4 leading-relaxed">
+                            Cutting-edge training on IIoT implementation and threat mitigation in
+                            industrial environments.
+                        </p>
+                        <div class="mb-4 lg:mb-6">
+                            <h4 class="text-xs lg:text-sm font-semibold text-gray-900 mb-1 lg:mb-2">Key Topics:</h4>
+                            <div class="grid grid-cols-2 gap-1 lg:gap-2">
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">IIoT Protocols</span>
+                                </div>
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">Edge Computing</span>
+                                </div>
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs"> Threat Analysis</span>
+                                </div>
+                                <div class="flex items-center space-x-1 lg:space-x-2">
+                                    <svg class="h-3 lg:h-4 w-3 lg:w-4 text-green-500 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-gray-600 text-xs">Secure Architecture</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2 lg:space-x-3">
+                            <button
+                                class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-3 lg:px-4 rounded-lg font-medium hover:opacity-90 transition-opacity text-sm">
+                                for more info download
+                            </button>
+                            <a href="images/Smart Industrial Automation and IIoT.png" download
+                                class="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center">
+                                <svg class="h-4 lg:h-5 w-4 lg:w-5 text-gray-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 10v6m0 0l-3-3m3 3l3-3M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Benefits Section -->
+    <div class="bg-gradient-to-r from-blue-50 via-white to-cyan-50 rounded-2xl lg:rounded-3xl p-6 lg:p-12">
+        <div class="text-center mb-8 lg:mb-12">
+            <h3 class="text-xl lg:text-3xl font-bold text-gray-900 mb-4">
+                Why Choose Our Training?
+            </h3>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Our training programs are designed by industry experts to provide practical, real-world skills
+                that employers value.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            <div class="text-center group">
+                <div
+                    class="bg-white w-12 h-12 lg:w-16 lg:h-16 rounded-2xl flex items-center justify-center mx-auto mb-3 lg:mb-4 shadow-lg group-hover:shadow-xl transition-shadow">
+                    <svg class="h-6 lg:h-8 w-6 lg:w-8 text-blue-600" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z">
+                        </path>
+                    </svg>
+                </div>
+                <h4 class="font-semibold text-gray-900 mb-1 lg:mb-2 text-sm lg:text-base">Expert Instructors</h4>
+                <p class="text-gray-600 text-xs lg:text-sm">Learn from industry professionals with 15+ years of hands-on
+                    experience.</p>
+            </div>
+            <div class="text-center group">
+                <div
+                    class="bg-white w-12 h-12 lg:w-16 lg:h-16 rounded-2xl flex items-center justify-center mx-auto mb-3 lg:mb-4 shadow-lg group-hover:shadow-xl transition-shadow">
+                    <svg class="h-6 lg:h-8 w-6 lg:w-8 text-blue-600" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m7.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                        </path>
+                    </svg>
+                </div>
+                <h4 class="font-semibold text-gray-900 mb-1 lg:mb-2 text-sm lg:text-base">Certification</h4>
+                <p class="text-gray-600 text-xs lg:text-sm">Receive industry-recognized certificates upon successful
+                    completion.</p>
+            </div>
+            <div class="text-center group">
+                <div
+                    class="bg-white w-12 h-12 lg:w-16 lg:h-16 rounded-2xl flex items-center justify-center mx-auto mb-3 lg:mb-4 shadow-lg group-hover:shadow-xl transition-shadow">
+                    <svg class="h-6 lg:h-8 w-6 lg:w-8 text-blue-600" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                        </path>
+                    </svg>
+                </div>
+                <h4 class="font-semibold text-gray-900 mb-1 lg:mb-2 text-sm lg:text-base">Practical Learning</h4>
+                <p class="text-gray-600 text-xs lg:text-sm">Hands-on experience with real industrial equipment and
+                    software.</p>
+            </div>
+            <div class="text-center group">
+                <div
+                    class="bg-white w-12 h-12 lg:w-16 lg:h-16 rounded-2xl flex items-center justify-center mx-auto mb-3 lg:mb-4 shadow-lg group-hover:shadow-xl transition-shadow">
+                    <svg class="h-6 lg:h-8 w-6 lg:w-8 text-blue-600" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h4 class="font-semibold text-gray-900 mb-1 lg:mb-2 text-sm lg:text-base">Flexible Schedule</h4>
+                <p class="text-gray-600 text-xs lg:text-sm">Choose from weekday, weekend, or customized training
+                    schedules.
+                </p>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+    </section>
+
+    <!-- Contact Section with background image -->
+    <section id="contact" class="relative py-12 lg:py-20 bg-cover bg-center bg-no-repeat"
+        style="background-image: url('images/3409297.jpg');" <!-- Dark overlay for readability -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-8 lg:mb-16">
+                <h2 class="text-3xl lg:text-5xl font-bold text-white-900 mb-4">
+                    Get In <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">Touch</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-4 lg:mb-6"></div>
+                <p class="text-lg lg:text-xl text-gray-100 max-w-3xl mx-auto">
+                    Ready to transform your industrial processes? Contact us today for a consultation and discover how
+                    we can help optimize your automation systems.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 lg:gap-12">
+                <!-- Contact Information -->
+                <div class="lg:col-span-1 space-y-6 lg:space-y-8">
+                    <div>
+                        <h3 class="text-xl lg:text-2xl font-bold text-white mb-4 lg:mb-6">Contact Information</h3>
+
+                        <div class="space-y-4 lg:space-y-6">
+                            <!-- Phone -->
+                            <div class="flex items-start space-x-3 lg:space-x-4">
+                                <div class="bg-blue-100 p-2 lg:p-3 rounded-xl">
+                                    <svg class="h-5 lg:h-6 w-5 lg:w-6 text-blue-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white mb-1 text-sm lg:text-base">Phone Numbers</h4>
+                                    <p class="text-gray-200 text-sm">+255 654 307 174</p>
+                                    <p class="text-gray-200 text-sm">+255 769 850 208</p>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="flex items-start space-x-3 lg:space-x-4">
+                                <div class="bg-green-100 p-2 lg:p-3 rounded-xl">
+                                    <svg class="h-5 lg:h-6 w-5 lg:w-6 text-green-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white mb-1 text-sm lg:text-base">Email Address</h4>
+                                    <p class="text-gray-200 text-sm">
+                                        <a href="mailto:technical.bitlynx@gmail.com"
+                                            class="underline decoration-transparent hover:decoration-emerald-400 transition">
+                                            technical.bitlynx@gmail.com
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="flex items-start space-x-3 lg:space-x-4">
+                                <div class="bg-purple-100 p-2 lg:p-3 rounded-xl">
+                                    <svg class="h-5 lg:h-6 w-5 lg:w-6 text-purple-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white mb-1 text-sm lg:text-base">Office Location</h4>
+                                    <p class="text-gray-200 text-sm">
+                                        Dar es Salaam, Ubungo<br>
+                                        Urafiki NHC Block H<br>
+                                        Tanzania
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Hours -->
+                    <div class="bg-white/10 backdrop-blur p-4 lg:p-6 rounded-2xl ring-1 ring-white/15">
+                        <div class="flex items-center mb-3 lg:mb-4">
+                            <svg class="h-4 lg:h-5 w-4 lg:w-5 text-blue-300 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <h4 class="font-semibold text-white text-sm lg:text-base">Business Hours</h4>
+                        </div>
+                        <div class="space-y-2 text-xs lg:text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-200">Monday - Friday</span>
+                                <span class="text-white font-medium">8:00 AM - 6:00 PM</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-200">Saturday</span>
+                                <span class="text-white font-medium">9:00 AM - 2:00 PM</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-200">Sunday</span>
+                                <span class="text-white font-medium">Emergency Only</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white/40 backdrop-blur-xl ring-1 ring-white/20 rounded-2xl shadow-2xl p-6 lg:p-12">
+
+                        <div id="contact-form">
+                            <div class="flex items-center mb-6 lg:mb-8">
+                                <svg class="h-5 lg:h-6 w-5 lg:w-6 text-blue-600 mr-2 lg:mr-3" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                                <h3 class="text-xl lg:text-2xl font-bold text-gray-900">Send us a Message</h3>
+                            </div>
+
+                            <form id="contactForm" class="space-y-4 lg:space-y-6">
+                                <div class="grid md:grid-cols-2 gap-4 lg:gap-6">
+                                    <div>
+                                        <label for="firstName"
+                                            class="block text-sm font-medium text-gray-700 mb-1 lg:mb-2">First Name
+                                            *</label>
+                                        <input type="text" id="firstName" name="firstName" required
+                                            class="w-full px-3 lg:px-4 py-2 lg:py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                                            placeholder="Enter your first name">
+                                    </div>
+                                    <div>
+                                        <label for="lastName"
+                                            class="block text-sm font-medium text-gray-700 mb-1 lg:mb-2">Last
+                                            Name *</label>
+                                        <input type="text" id="lastName" name="lastName" required
+                                            class="w-full px-3 lg:px-4 py-2 lg:py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                                            placeholder="Enter your last name">
+                                    </div>
+                                </div>
+
+                                <div class="grid md:grid-cols-2 gap-4 lg:gap-6">
+                                    <div>
+                                        <label for="email"
+                                            class="block text-sm font-medium text-gray-700 mb-1 lg:mb-2">Email
+                                            Address *</label>
+                                        <input type="email" id="email" name="email" required
+                                            class="w-full px-3 lg:px-4 py-2 lg:py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                                            placeholder="your@email.com">
+                                    </div>
+                                    <div>
+                                        <label for="phone"
+                                            class="block text-sm font-medium text-gray-700 mb-1 lg:mb-2">Phone
+                                            Number</label>
+                                        <input type="tel" id="phone" name="phone"
+                                            class="w-full px-3 lg:px-4 py-2 lg:py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                                            placeholder="+255 XXX XXX XXX">
+                                    </div>
+                                </div>
+
+                                <div class="grid md:grid-cols-2 gap-4 lg:gap-6">
+                                    <div>
+                                        <label for="company"
+                                            class="block text-sm font-medium text-gray-700 mb-1 lg:mb-2">Company
+                                            Name</label>
+                                        <input type="text" id="company" name="company"
+                                            class="w-full px-3 lg:px-4 py-2 lg:py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                                            placeholder="Your company name">
+                                    </div>
+                                    <div>
+                                        <label for="service"
+                                            class="block text-sm font-medium text-gray-700 mb-1 lg:mb-2">Service of
+                                            Interest</label>
+                                        <select id="service" name="service"
+                                            class="w-full px-3 lg:px-4 py-2 lg:py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            <option value="">Select a service</option>
+                                            <option value="IoT Telemetry Systems">IoT Telemetry Systems</option>
+                                            <option value="PLC, HMI & SCADA Integration">PLC, HMI & SCADA Integration
+                                            </option>
+                                            <option value="Control System Upgrades">Control System Upgrades</option>
+                                            <option value="Expert Troubleshooting">Expert Troubleshooting</option>
+                                            <option value="Industrial Training">Industrial Training</option>
+                                            <option value="Consultation Services">Consultation Services</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="message"
+                                        class="block text-sm font-medium text-gray-700 mb-1 lg:mb-2">Message
+                                        *</label>
+                                    <textarea id="message" name="message" required rows="4"
+                                        class="w-full px-3 lg:px-4 py-2 lg:py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none"
+                                        placeholder="Tell us about your project requirements..."></textarea>
+                                </div>
+
+                                <button type="submit"
+                                    class="w-full flex items-center justify-center px-6 lg:px-8 py-3 lg:py-4 rounded-xl font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+                                    <svg class="h-4 lg:h-5 w-4 lg:w-5 mr-2" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                    </svg>
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+
+                        <div id="success-message" class="hidden text-center py-8 lg:py-12">
+                            <div
+                                class="bg-green-100 w-16 h-16 lg:w-20 lg:h-20 rounded-full flex items-center justify-center mx-auto mb-3 lg:mb-4">
+                                <svg class="h-8 lg:h-10 w-8 lg:w-10 text-green-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-1 lg:mb-2">Message Sent!</h3>
+                            <p class="text-gray-600">Thank you for your inquiry. We'll get back to you within 24 hours.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="mt-8 lg:mt-12 grid md:grid-cols-2 gap-3 lg:gap-4 max-w-4xl mx-auto">
+                <div
+                    class="lift bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl p-4 lg:p-5 text-white text-center contact-card">
+                    <svg class="h-5 lg:h-6 w-5 lg:w-6 mx-auto mb-1 lg:mb-2" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    <h3 class="text-sm lg:text-base font-bold mb-1">WhatsApp Chat</h3>
+                    <p class="mb-2 lg:mb-3 opacity-90 text-xs">Get instant support via WhatsApp</p>
+                    <a href="https://wa.me/255654307174" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center bg-white/20 backdrop-blur-sm px-2 lg:px-3 py-1 lg:py-1.5 rounded-full font-semibold text-xs hover:bg-white/30 transition-colors">
+                        Chat Now
+                    </a>
+                </div>
+
+                <div
+                    class="lift bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl p-4 lg:p-5 text-white text-center contact-card">
+                    <svg class="h-5 lg:h-6 w-5 lg:w-6 mx-auto mb-1 lg:mb-2" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    <h3 class="text-sm lg:text-base font-bold mb-1">Emergency Support</h3>
+                    <p class="mb-2 lg:mb-3 opacity-90 text-xs">24/7 technical support available</p>
+                    <a href="tel:+255654307174"
+                        class="inline-flex items-center bg-white/20 backdrop-blur-sm px-2 lg:px-3 py-1 lg:py-1.5 rounded-full font-semibold text-xs hover:bg-white/30 transition-colors">
+                        Call Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-b from-gray-900 to-black text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Main Footer Content -->
+            <div class="py-8 lg:py-16 grid lg:grid-cols-4 gap-8 lg:gap-12">
+                <!-- Company Info -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center space-x-3 mb-4 lg:mb-6">
+
+                        <div>
+                            <h3 class="text-xl lg:text-2xl font-bold">
+                                Bitlynx<span class="text-blue-400">Controls</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-300 mb-4 lg:mb-6 leading-relaxed text-sm lg:text-base">
+                        Leading provider of industrial automation solutions with 15+ years of experience.
+                        We bridge the gap between almost-right solutions and the right solutions.
+                    </p>
+
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-base lg:text-lg font-semibold mb-4 lg:mb-6 text-white">Quick Links</h4>
+                    <ul class="space-y-2 lg:space-y-3">
+                        <li><a href="#hero" class="text-gray-300 hover:text-blue-400 transition-colors text-sm">Home</a>
+                        </li>
+                        <li><a href="#about"
+                                class="text-gray-300 hover:text-blue-400 transition-colors text-sm">About</a></li>
+                        <li><a href="#services"
+                                class="text-gray-300 hover:text-blue-400 transition-colors text-sm">Services</a>
+                        </li>
+                        <li><a href="#training"
+                                class="text-gray-300 hover:text-blue-400 transition-colors text-sm">Training</a>
+                        </li>
+                        <li><a href="#contact"
+                                class="text-gray-300 hover:text-blue-400 transition-colors text-sm">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-base lg:text-lg font-semibold mb-4 lg:mb-6 text-white">Our Services</h4>
+                    <ul class="space-y-2 lg:space-y-3">
+                        <li><a href="#services"
+                                class="text-gray-300 hover:text-blue-400 transition-colors text-xs lg:text-sm">IoT
+                                Telemetry Systems</a></li>
+                        <li><a href="#services"
+                                class="text-gray-300 hover:text-blue-400 transition-colors text-xs lg:text-sm">PLC
+                                Integration</a></li>
+                        <li><a href="#services"
+                                class="text-gray-300 hover:text-blue-400 transition-colors text-xs lg:text-sm">SCADA
+                                Systems</a>
+                        </li>
+                        <li><a href="#services"
+                                class="text-gray-300 hover:text-blue-400 transition-colors text-xs lg:text-sm">Control
+                                System
+                                Upgrades</a></li>
+                        <li><a href="#services"
+                                class="text-gray-300 hover:text-blue-400 transition-colors text-xs lg:text-sm">Expert
+                                Troubleshooting</a></li>
+                        <li><a href="#services"
+                                class="text-gray-300 hover:text-blue-400 transition-colors text-xs lg:text-sm">Industrial
+                                Training</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-base lg:text-lg font-semibold mb-4 lg:mb-6 text-white">Contact Info</h4>
+                    <div class="space-y-3 lg:space-y-4">
+                        <div class="flex items-start space-x-2 lg:space-x-3">
+                            <svg class="h-4 lg:h-5 w-4 lg:w-5 text-blue-400 mt-1 flex-shrink-0" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <div class="text-gray-300 text-xs lg:text-sm">
+                                <p>Dar es Salaam, Ubungo</p>
+                                <p>Urafiki NHC Block H</p>
+                                <p>Tanzania</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-2 lg:space-x-3">
+                            <svg class="h-4 lg:h-5 w-4 lg:w-5 text-blue-400 flex-shrink-0" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                </path>
+                            </svg>
+                            <div class="text-gray-300 text-xs lg:text-sm">
+                                <p>+255 654 307 174</p>
+                                <p>+255 769 850 208</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-2 lg:space-x-3">
+                            <svg class="h-4 lg:h-5 w-4 lg:w-5 text-blue-400 flex-shrink-0" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <div class="text-gray-300 text-xs lg:text-sm">
+                                <p><a href="technical.bitlynx@gmail.com" class="__cf_email__"
+                                        data-cfemail="467263656e686f65676a28646f726a7f687e46616b676f6a2865696b">technical.bitlynx@gmail.com</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="mt-6 lg:mt-8">
+                        <a href="#contact"
+                            class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-2 lg:py-3 px-4 lg:px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all transform hover:scale-105 block text-center text-sm lg:text-base">
+                            Get Free Quote
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-gray-800 py-6 lg:py-8">
+                <div class="flex flex-col lg:flex-row justify-between items-center">
+                    <div class="text-gray-400 text-xs lg:text-sm mb-3 lg:mb-0">
+                        © 2025 Bitlynx Controls Limited. All rights reserved.
+                    </div>
+                    <div class="flex space-x-4 lg:space-x-6 text-xs lg:text-sm">
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Top Button -->
+        <button id="back-to-top"
+            class="fixed bottom-6 lg:bottom-8 right-6 lg:right-8 bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-2 lg:p-3 rounded-full shadow-lg hover:from-blue-700 hover:to-cyan-700 transition-all transform hover:scale-110 z-50">
+            <svg class="h-4 lg:h-5 w-4 lg:w-5 transform -rotate-90" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3">
+                </path>
+            </svg>
+        </button>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function () {
+            const header = document.getElementById('header');
+            const isScrolled = window.scrollY > 50;
+
+            if (isScrolled) {
+                header.classList.remove('bg-transparent');
+                header.classList.add('bg-white', 'shadow-lg');
+                // Change text colors
+                const logo = header.querySelector('h1');
+                const navLinks = header.querySelectorAll('nav a');
+                logo.classList.remove('text-white');
+                logo.classList.add('text-gray-900');
+                navLinks.forEach(link => {
+                    link.classList.remove('text-white', 'hover:text-blue-300');
+                    link.classList.add('text-gray-700', 'hover:text-blue-600');
+                });
+            } else {
+                header.classList.remove('bg-white', 'shadow-lg');
+                header.classList.add('bg-transparent');
+                // Revert text colors
+                const logo = header.querySelector('h1');
+                const navLinks = header.querySelectorAll('nav a');
+                logo.classList.remove('text-gray-900');
+                logo.classList.add('text-white');
+                navLinks.forEach(link => {
+                    link.classList.remove('text-gray-700', 'hover:text-blue-600');
+                    link.classList.add('text-white', 'hover:text-blue-300');
+                });
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', function () {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // About section tabs
+        const aboutTabs = document.querySelectorAll('.about-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        aboutTabs.forEach(tab => {
+            tab.addEventListener('click', function () {
+                const targetTab = this.getAttribute('data-tab');
+
+                // Remove active class from all tabs
+                aboutTabs.forEach(t => {
+                    t.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'transform', 'scale-105');
+                    t.classList.add('bg-white', 'text-gray-700', 'hover:bg-gray-100', 'hover:shadow-md');
+                    t.querySelector('svg:last-child')?.classList.add('hidden');
+                });
+
+                // Add active class to clicked tab
+                this.classList.remove('bg-white', 'text-gray-700', 'hover:bg-gray-100', 'hover:shadow-md');
+                this.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'transform', 'scale-105');
+                this.querySelector('svg:last-child')?.classList.remove('hidden');
+
+                // Hide all tab contents
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+
+                // Show target tab content
+                document.getElementById(targetTab + '-content').classList.remove('hidden');
+            });
+        });
+
+        // Contact form handling
+        const contactForm = document.getElementById('contactForm');
+        const contactFormDiv = document.getElementById('contact-form');
+        const successMessage = document.getElementById('success-message');
+
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            // Create WhatsApp message
+            const message = `New inquiry from ${data.firstName} ${data.lastName}
+Company: ${data.company}
+Email: ${data.email}
+Phone: ${data.phone}
+Service: ${data.service}
+Message: ${data.message}`;
+
+            const whatsappUrl = `https://wa.me/255654307174?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+
+            // Show success message
+            contactFormDiv.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                successMessage.classList.add('hidden');
+                contactFormDiv.classList.remove('hidden');
+                contactForm.reset();
+            }, 3000);
+        });
+
+        // Back to top button
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        backToTopBtn.addEventListener('click', function () {
+            document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Smooth scrolling for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
